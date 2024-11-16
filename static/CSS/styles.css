@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+:root{
+    --bg-color: rgb(228, 245, 222);
+    --secondary-bg-color: rgb(229, 152, 156);
+    --tertiary-bg-color: rgb(69, 123, 157);
+    --quaternary-bg-color: rgb(241, 250, 238);
+    --text-color: rgb(0, 0, 0);
+    --main-color: rgb(167, 218, 220);
+    --quote-color: rgb(204, 237, 192);
+}
+body{
+    background-color: var(--quaternary-bg-color);
+}
+/* ----------------------------------------------------------Header---------------------------------------------------- */
+header{
+    height: 3rem;
+    width: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5% 0rem 12%;
+    /* border-bottom: 2px solid black; */
+}
+.navbar{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.navbar a{
+    width: 5.5rem;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 2rem;
+    color: var(--text-color);
+    background-color: var(--tertiary-bg-color);
+    padding: 0.35rem;
+    border-radius: 5px;
+    font-weight: 600;
+}
+.navbar i{
+    margin-left: 2rem;
+    border-radius: 50%;
+}
+.navbar #profile{
+    font-size: 32px;
+    height: 3rem;
+    width: 3rem;
+    text-align: center;
+    position: relative;
+    left: 1rem;
+    top: 1rem;
+    background-color: var(--main-color);
+    border: 2px solid black;
+}
+/* --------------------------------------------------------Footer---------------------------------------------------- */
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.5rem;
+    height: 3.5rem;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    background-color: var(--secondary-bg-color);
+}
+footer h2, p{
+    font-size: 0.9rem;
+}
+/* --------------------------------------------------------Index---------------------------------------------------- */
+
+.home{
+    height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.task{
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    background-color: var(--quaternary-bg-color);
+}
+.quotes_container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;    
+    background-color:var(--quaternary-bg-color);
+    padding: 30px 20px 0 0;
+    text-align: center;
+}
+
+.quotes {
+    width: 70%;
+    height: 85%;
+    font-size: 1.5rem;
+    background-color: var(--quote-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+    border-radius: 50%; /* Circular shape */
+    padding: 10px;
+    animation: fade 5s infinite;
+}
+#para {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--text-color);
+}
+
+#author {
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+}
+
+@keyframes fade {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+
+
+
