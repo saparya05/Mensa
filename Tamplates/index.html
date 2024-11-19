@@ -4,7 +4,46 @@
 
 {% block body %}
 <div class="home">
-    <div class="task"></div>
+    <div class="task">
+        <div class="music-player">
+            <i class="music-icon" onclick="toggleMenu()"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAtVJREFUWEftl1uoDlEUx3+nCEUe3ElyKV5cIw8eKHKJElEonuTWoQiR5J6QFLklDy55QTwIScQDRRRvRJIiCkVR5LL/tea0jJkz88355nM6WW/fnjV7/b619/qvNXU0M6trZjy0GKA2wBzL7lXgbbUyXSRDPYAbwCCD+AlcAc4A54BvTYErAnQZmJIS9JOBnQTuFgErAqSgHSzYO6BrSuCnwCngBPAqL1wRoF9u81bABGAeMMOB+vjyv2lgZ4GvjcE1Fci/3xaYBiwAJgOtEwJ/AS4AB9OOtJpAPn5HYCYwHxgHifJyGFgWhy4LyMfpaRIxFxgZAxgN3PNrtQDy8QYAB+xItb4O2PUvgRR7M7DJILbY7wamWmeo5QCphBcCK4F+wPugM4+A81ayUYqLZLjiI+sNXHO9qto6VhGQlFdlODyn1JeeIQmVVDSybaFXHbIfK4D1MdDSgR6HezLYgq4C9sUANgDb3VrpQGp8utCyznaZPZNmode1BPoMtLeA3UKv0XjhrTvwxhY0hqhnpdkQO+LZQQjV8Z8Bt4JSdwJm5RXG+67f/CXrwEZgq212BxiTQrMG2J2jMDKVehFw1G20A9gPaIZeDihQZOrkpxOCTgcu5oCRSyaQyl5ZGpax4e0wdI1N8BH4i/CndNdkT8IRLwYeAKOAY2GK7O/eywSSbx/gevj36sxJJsWemHC/5KsZSGouewmMAD64TboEH1Wy7mKuDEXvtgufNksBlX4vW9SMLBk4DnxPgdW922nPpGf1CX66EroaFQFlnFjq49XAHnuqwEsygOS/1/sUEbbGYKeGKr1kDvrSGAp8dC9ISh4CmiJlk6xvNrhUG0iD/fNwrGrQMmmPpgZdao2rutR97Zn8BgYp+VFmhrR33rIfb1/Af2S82hmKNl8bn5VdVKm2mviRpLMvC0ixNMJoOlCbUBxVpr7/VYXSp0QrE6hQpf4Hykrbb0/0jCUU4HNxAAAAAElFTkSuQmCC"/></i>
+            <div class="playlist-menu" id="playlistMenu">
+                <button onclick="selectCategory('yoga')">Yoga</button>
+                <button onclick="selectCategory('meditation')">Meditation</button>
+                <button onclick="selectCategory('sleep')">Sleep</button>
+                <button onclick="selectCategory('motivational')">Motivational</button>
+                <button onclick="selectCategory('energetic')">Energetic</button>
+                <button class="close-button" onclick="closeMenu()">✖</button>
+            </div>
+            <div class="songs-list" id="songsList">
+                <h2 id="songsCategory">Playlist</h2>
+                <ul id="songs"></ul>                
+                <button class="close-button" onclick="closeSongsList()">✖</button>
+            </div>
+            <div class="music-player-side" id="musicPlayerSide">
+                <audio id="audioPlayer" controls></audio>
+                <button class="close-button" onclick="closeMusicPlayer()">✖</button>
+            </div>
+        </div>
+        <div class="AI">
+            <i class="ai-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAA3VJREFUWEftmFmoT1EUxn8yzx54QCKZh4REUR4MEeUFJZnHZJ4yK5Q5RZK5hBQRSfEgeZFISmaZIlNekDLF+W7r3LbdGfb5kySrbvfes9fwnTXvU4G/jCr8ZXj4ZwD1AkYA3YEG9iNnvwFeA5eBQ8ClohEo4qFqwFRgNtA00NBDYAuwG/gUIhMKaDywHqgfojSBR16bAxzOkw8BJCAL8xQFni8H1mTxZgHS2X5gTKCxULatwKw05ixAOyxnQg0V4VsFrEwSSAM0F9hcxEIJvKOAg75cEqC6wHOgZglGioi8AJoBn12hJEByp5LvT9D0qIdtzwJUBXgF1CsBzW1gD3AFuAlUBNoC3YDJUcm3StD5xLxUfuR7aBBw2k7FrN6hN2iYAfAZsMh6zPcUPtlRzqxL0NUZuB7L+YD2AmqCIgkvBqras75Ae+vSj4FbwFlrDV8CPSpdU4AZUUK3MJnVwIo0QELayQ57AxcDDRVlGwicMSG91IA0QHJ/YztsCTzwLHUEhlgVqmlm0TjTdRK44THKhmyJlG8d0gB9jGZWdTtU2ev/mATmWtT6K9mDXeb+JFA7LZF19hXo4oGSjVj3u2gAq9WUkZ9D74FadlYb+OBYWxZVjuIdk/JGVZlE6i2VnQN/hsmGbIn0u04aoHvRHqNQifyQKQT7HCN3gTYpgO4ArZ0zFYobYrUAyYt+0uN76AKgZBb1Ac57BhUKAdOeMxM4lwKoP6Ah2tyAqLJc6ufIyoZslZEPaGMUpvl2pr9/19rh49bSpkVPtDYaH0vSAPVw1s77Kd01xSmFHj9yOnRXK5ZED8ljKsdGpn5YVJLHCpnKZ1bHPmBsAqawllPScFXIFC6RcqVd6D6cj4Ua1tviUTQN0N6VCUg94qmzPx+NxsTwAGN5LHr5U8BgY3xpYyh3/RD/RLspxEa0B//qSrIN0LoR08ikpT9rhd0ALHAUKO4CGjpIY1Fdn47YyImfpS77ebcO7TcTHFCa8lrgBO5bTow02SfZahLPR4mo5LUiJ1IeIAkpXEs96bfRVnDCKlAgVZnS1cQ6/FDzSPlIMHl5fFPWi4QAkvxYq7xSL4ra0dXZj4dkfh6PmwsKwbwCV2nNKeWiQqypn0uhHnIVSaZn1KNG21oRf2zQ+qqPDbpN6CODrs1XcxF4DKUAKmqjEP9/QHnu+gGPvpclftc4egAAAABJRU5ErkJggg=="/></i>
+            <a href="#">My Friend</a>
+        </div>
+        <div class="task-item">
+            <div class="tasks">
+                <i class="task-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAeFJREFUWEft1s/rD0Ecx/HH96CQm1IkKQrlKkcXJQcOXFyUUC4cFCUclCiREi5KUsqNA8lFOfIHKOWilKSk/DyJHe2nPq2dnZ2d/epz+G5tbTuv9+v9nPe+Z2bnzNg1N2M8FoBSX6RvhYJuM7ZiCV7X97tIgjXYgI34iRd4hd+lQCtwDbuxtMXsZQW2D2/rsXUVyH1sadF+xWMcq+5PMbCuCu3CHSxPzOobDmExbmJZQv8Rh/GoTRcDOovzqfIWjp+qPv+lpkcb0E48KUzWN3w7nk2Lm0CL6n5Y1dexUBd6bz1+TXyaQAdxuzBJbvj+CupeDOgpduQ6FuofYk8MKOwrqwsT5IaHPW1TDOhHvfHlmpboP2BlDOj99GBJlozYsIOHU+Dv1Wzq59iWYTaG9AH2xoD+x4bYnMQR3IoBhYZ+Ux8DY8w+5fEZa/ElBhTen8aFlNNI4wdwd9ordpZdxfGRksZsLuJMc7DrtL+Oo/MEdaP+DfnHPvWDNh9QUZi2Zd9WkDGhOmH6AgXdGFBJmBygUqheMLlAQ6Gu4GTfxZFq6jafyzjRM0EWzJAKTTj6QGXDlACF2C6oQTClQDGowTBjADWhimDGAppAfa8ezvVs9qhsyCorzdkZvwCUKu/MVegP2kFHJZwLxbsAAAAASUVORK5CYII="/></i>
+                <a href="#">Health Tracker</a>
+            </div>
+            <div class="tasks">
+                <i class="task-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAA+ZJREFUWEfNl1fIVVcQhb/fhiYRRcUCCqLEgigW7MYYu2LDgvVBQUQUG75oJPpgSXwxCYEoCQhGEhEUe8NeiYqoEQOCGtHYCIkaSdHEshfM/tlszj33Xu9B/nm6d5999qy9ZmbNnDIqmJVVMDy8TUDV7fL/ppGQNaDawOMEh+8Cu4GXwDDgn1ygsgTUB9gFzAPWBw4rAaeBbrZ21ED9nQQqK0A9gSNANXMyF/gqcDgO2ARUtjUBHAT8FYPKCpDy4xjQNXAwH/gy+D8G2BL8P+uYGwA8DUFlBagXcBDwiet9zALWGjPbLVSh//NAf+BPv5gFIIE5ALyTI1GnA/2AiTmeXwI+9KBKBaQQKXc8mN+BkcDnQOccAL4FDgHfA1WAH4EhvjpLASQwOvg9c3zXmLgG1HRVtR/oEYFaBSyxtRHATEAJX57cbwpItz9sjr3PX436m7YgoPscaIXU2yeOlRVZC2NHC1OthIMF6gPglj2rYSyGTC0AvshKGNs7FiRsUmTZE8uXZVDehu4YU7/YHuWXVPqjAMRCYE0SqGJC1s7A1LGDfnPaI3X+GZgMbEwBJaak4qo2b7OBr2NQhQJq42543Klv3eAA6Yt0xlsMahGwOng+CtgWAZgKbAjXCgHUGjgB1Eug+DNgcbA+BfgO+MYqyD9Sm1DYVOah/Qc0AR76xXyAWjiaTzpq6wc5c93R3yk4NSxlLSupTwGvbM9gC5cHo2lA+dUKGG3yUH5cGqD3jZmGtvsPy4Eb1ibCvvUp8HECgzEY9S2psi4l5s8VmkPNbWRoELww3GjXkjRGOtQleD7QgOYKkwdzMQF4KkNNLUyNoxcfWDh0O5l0SG1DuqR2MCPYry6+B6hqa2qeYkZ9K9WSQnbGNcvu9pZupWlPQ5bsvgPR2yj3oOY4xytTcuaRadDlfGD0PAakJrfXXlTy9QWU2D+kgAr96P2dQTUJjJi5UgiYJEDqO6oqmRS3pc2/E6w7h0y1BdTdvZUMJgmQRkwBaWRelrvBfKn9Hm9jqFiNRTGptNUq8uZMzFxSDk0yNrT3mYXstr0oNVbCTgtyJk5ghUladLXQMIX7cumQhE2Du0w5oaEryTIFkxQy71SlfCFAoHlZQ7saaaY5U0jIJPE7nIoOjTa/sB6lnOoQ6UxJYUoLmZJ6sytTfbLkMs1A0qawN2kMKUhn8uVVmEMqaemNqsmbvqM0SK0DNA/Flhkz/uAQUDO7pR/atxo4hUpgNVBJkTXAy+7Z18JP+W5dzPO4ylRZapr6YhgL/B8dJrAatPRBqGErFMZi/Obcm1T2GivUkZ9n4qHIQ/INaEUeV/r2CgfoNcU4wyW02pN/AAAAAElFTkSuQmCC"/></i>
+                <a href="#">Appointment</a>
+            </div>
+            <div class="tasks">
+                <i class="task-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAm5JREFUWEft1snrjVEcx/HXDwtzpijWNkoyWxAZkoii/ANSSkRsrAwrKUlISfZ2QpllyhDJgsjCgtgoZIpQnm+dW4/rPvd57kDK79Ste+455/t938/3c4Ye/1jr+cd49AKVVeS/UGg65mACxuFR+pzHy7+p0FgcwMqCpF+xE3vwowisWyULRU5jaJkCuJ0U/N5objeAAuYMBuUSHMM1PM9UG4ktmJUb345dfwJoNsIbA1LwD1iFC3XJ+mAfNqbfo2TT8KAeqhOFZuJy5omBKeh7zG2UJI33xV1MTv2D2NAtoIC5iMEp4NusRPObwNTyrsWR1DmJFd0ACi9ESWowrxPMwwqGnoE7ad59TO0UqB7mGybhcQWYmLI07cb43rFCARNlyu+mCLwfmyoChbFrc3ekc+mXpVVNHZ6JMg0pSLwXW0ugFmdb/2xuzvKsZKfaKVm9gYvy7sa2gsFQ91JuR4Z/4rcoeUsKTcHVnIHLKtOoDGHcK7kYbzARrxoFa1ay4XiC0WUUdeOhUqgVLQwfMMNS/1PWn4d7RTGbAZ1odE5UhNuMc7iBEWnNx6y/MLftG4YqAhqPpxWTF017V6fMgjKYCFQEtA6HOwSqLa+kTG1yEdBxrO4CUEswzRSKN0ts905aGHgRbrUSpEiho1jTSqC6uS0rU1ay9YjnQTvtc7psa5doSzGKFBqFZ02uiqIkARNXRGz3tlqzc6hVlTqGaWbq2tjNurdw0b8OzyzpRJkyD9XG+6e3cJxLRe0F4ub+7X3cTs2qPj+WpS08JjN7+Ktf9q6Jk/g6DuFLO8kbrakK1K18pXF6gcok6lWoTKGf9v9pJTXcOhUAAAAASUVORK5CYII="/></i>
+                <a href="#">Medication</a>
+            </div>
+        </div>
+    </div>
     <div class="quotes_container">
         <div class="slideshow-container">
             <img class="slide" src="static/CSS/images/Image 1.jpg" alt="Image 1">
@@ -16,5 +55,7 @@
             <img class="slide" src="static/CSS/images/Image 7.jpg" alt="Image 7">
         </div>
     </div>
+</div>
+<div class="section2">
 </div>
 {% endblock %}
