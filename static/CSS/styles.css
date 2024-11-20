@@ -85,80 +85,9 @@ footer{
 footer h2, p{
     font-size: 0.9rem;
 }
-@media(max-width:1285px){
-    header{
-        height: 5rem;
-        padding: 0 8% 0rem 12%;
-    }
-    .navbar a{
-        width: 7rem;
-        padding: 0.6rem;
-        font-size: 1.3rem;
-    }
 
-    #profile{
-        font-size: 40px;
-        height: 4rem;
-        width: 4rem;
-        top: 2rem;
-    }
-    footer{
-        padding: 2.5rem;
-    }
-    footer h2, p{
-        font-size: 1.5rem;
-    }
-}
 
-@media(max-width:895px){
-    #menu-icon{
-        display: block;
-    }
-    header{
-        height: 5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 8% 0rem 12%;
-    }
-    .navbar{
-        display: none;
-    }
-    .navbar a{
-        width: 7rem;
-        padding: 0.6rem;
-        font-size: 1.3rem;
-        display: block;
-        margin: 3rem 1rem;
-        color: var(--text-color);
-    }
-    .nav-container{
-        display: flex;
-        justify-content: center;
-        align-items: baseline;
-    }
-    .icon{
-        margin-left: 0rem;
-        border-radius: 50%;
-    }
-    #profile{
-        font-size: 32px;
-        height: 3rem;
-        width: 3rem;
-        text-align: center;
-        position: relative;
-        left: 0;
-        top: 0;
-        background-color: var(--bg-color);
-        border: none;
-    }
-    footer{
-        padding: 1.5rem;
-    }
-    footer h2, p{
-        font-size: 0.6rem;
-    }
-}
+
 /* --------------------------------------------------------Index---------------------------------------------------- */
 
 .home{
@@ -169,7 +98,7 @@ footer h2, p{
 }
 .task{
     height: 50%;
-    width: 50%;
+    width: 10%;
     background-color: var(--quaternary-bg-color);
 }
 .quotes_container {
@@ -179,6 +108,7 @@ footer h2, p{
     padding: 30px 20px 0 0;    
     display: flex;
     justify-content: center;
+    visibility: hidden;
 }
 
 .slideshow-container {
@@ -190,6 +120,7 @@ footer h2, p{
     border-radius: 50%;
     border: 1px ;
     overflow: hidden;
+    visibility: visible;
   }
   
   .slide {
@@ -219,6 +150,7 @@ footer h2, p{
     width: 100%;
     background-color: var(--secondary-bg-color);
     overflow: visible;
+    z-index: -2;
 }
 
 .section2::before,
@@ -229,7 +161,7 @@ footer h2, p{
     position: absolute;
     bottom: 0;
     background: inherit;
-    z-index: 0;
+    z-index: -2;
     transform-origin: right top;
     transform: skewY(0deg);
 
@@ -240,6 +172,7 @@ footer h2, p{
 }
 /* ----------------------------------------------------Music---------------------------------------------- */
 .music-icon img{
+  position: relative;
     margin: 0.5rem 1rem 0.5rem 1rem;
     border: 2px solid black;
     border-radius: 50%;
@@ -264,8 +197,9 @@ footer h2, p{
   }
   
   .playlist-menu {
-    top: 50px;
-    left: -20px;
+    position: absolute;
+    top: 5px;
+    left: 95px;
     background-color: var(--tertiary-bg-color);
     border-radius: 5px;
     flex-direction: column;
@@ -276,8 +210,9 @@ footer h2, p{
   }
   
   .songs-list {
-    top: 50px;
-    right: -20px;
+    position: absolute;
+    top: 5px;
+    left: 95px;
     background-color: var(--tertiary-bg-color);
     border-radius: 5px;
   }
@@ -324,170 +259,301 @@ footer h2, p{
     border-radius: 5px;
     background-color: var(--quaternary-bg-color);
   }
-@media(max-width:1285px){
-    .quotes_container {
-        width: 70%;
-        height: 100%;
-    }
-    .slideshow-container {
-        width: 65%;
-        height: 70%;
-      }
-}
-@media(max-width:895px){
-    
-    
-.home{
-    display: flex;
-    align-items: center;
-    flex-direction: column-reverse;
-}
-.task{
-    height: 50%;
-    width: 80%;
-    background-color: var(--quaternary-bg-color);
-}
-.quotes_container {
-    width: 80%;
-    height: 40%;
-}
-
-.slideshow-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: var(--quaternary-bg-color);
-    border-radius: 15px;
-    border: 1px ;
-    overflow: hidden;
-  }
-  
-  .slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    border-radius: 15px;
-    transition: opacity 5s ease- out;
-  }
-
-/* ----------------------------------------------------Music---------------------------------------------- */
-.music-icon img{    
-    z-index: 2;
-    margin: 0.5rem 1rem 0.5rem 1rem;
-    border: 2px solid black;
-    border-radius: 50%;
-    background-color: var(--tertiary-bg-color);
-    padding: 0.5rem;
-    transition: transform 0.3s;
-}
-.music-player{
-    z-index: 2;
-    display: flex;
-    position: relative;
-    text-align: center;
-}
-
 
   
-  .playlist-menu {
-    top: 50px;
-    left: -20px;
-    background-color: var(--tertiary-bg-color);
-    border-radius: 5px;
-    flex-direction: column;
-  }
-  
-  .playlist-menu button{
-    font-weight: 600;
-  }
-  
-  .songs-list {
-    top: 50px;
-    right: -20px;
-    background-color: var(--tertiary-bg-color);
-    border-radius: 5px;
-  }
-  .songs-list button{
-    background-color: var(--tertiary-bg-color);
-  }
-  
-  .music-player-side {
-    top: 50px;
-    right: -20px;
-    display: none;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .playlist-menu button,
-  .songs-list li {
-    margin: 5px 0;
-    padding: 10px;
-    border: none;
-    background: var(--bg-color);
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s;
-    list-style: none;
-  }
-  
-  .playlist-menu button:hover,
-  .songs-list li:hover {
-    background: #e0e0e0;
-  }
-  
-  audio {
-    width: 200px;
-    box-shadow: 0px 0px 2px rgb(42, 59, 40);
-    border-radius: 50px;
-  }
-  
-  .close-button {
-    border: none;
-    color: var(--text-color);
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: var(--quaternary-bg-color);
-  }
-  
-}
-.AI{
-    display: flex;
-    align-items: center;
-}
-.ai-icon img{    
-    z-index: 2;
-    margin: 0.5rem 1rem 0.5rem 1rem;
-    border: 2px solid black;
-    border-radius: 50%;
-    background-color: var(--tertiary-bg-color);
-    padding: 0.5rem;
-    transition: transform 0.3s;
-}
-.ai-icon img:hover {
-    transform: scale(1.1);
-  }
-  .AI a, .tasks a{
-    color: var(--text-color);
-    font-size: 20px;
-    font-weight: 600;
-  }
-  .tasks{
-    display: flex;
-    align-items: center;
-  }
 .task-icon img{
+  z-index: 2;
     margin: 0.5rem 1rem 0.5rem 1rem;
     border: 2px solid black;
     border-radius: 50%;
     background-color: var(--tertiary-bg-color);
     padding: 0.5rem;
     transition: transform 0.3s;
-    z-index: 3;
   }
   .task-icon img:hover {
     transform: scale(1.1);
   }
+
+.motivate{
+  width: 40%;
+}
+.motivate p{
+  padding-top: 7rem;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+.tasks{
+  position: relative; 
+  display: inline-block;
+}
+
+.icon-link i {
+  font-size: 24px; 
+  color: #ff0000;
+  transition: color 0.3s ease;
+}
+
+.icon-link i:hover {
+  color: #cc0000; 
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #bbbbbb;
+  color: #000000;
+  padding: 5px 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap; 
+  opacity: 0; 
+  visibility: hidden; 
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1; 
+}
+.tasks:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+/* --------------------------------------------------Responsive----------------------------------------- */
+@media(max-width:1285px){
+  header{
+      height: 5rem;
+      padding: 0 8% 0rem 12%;
+  }
+  .navbar a{
+      width: 7rem;
+      padding: 0.6rem;
+      font-size: 1.3rem;
+  }
+
+  #profile{
+      font-size: 40px;
+      height: 4rem;
+      width: 4rem;
+      top: 2rem;
+  }
+  footer{
+      padding: 2.5rem;
+  }
+  footer h2, p{
+      font-size: 1.5rem;
+  }
+  .quotes_container {
+      width: 70%;
+      height: 100%;
+  }
+  .slideshow-container {
+      width: 65%;
+      height: 70%;
+    }
+}
+@media(max-width:895px){
+  #menu-icon{
+      display: block;
+  }
+  header{
+      height: 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 8% 0rem 12%;
+  }
+  .navbar{
+      display: none;
+  }
+  .navbar a{
+      width: 7rem;
+      padding: 0.6rem;
+      font-size: 1.3rem;
+      display: block;
+      margin: 3rem 1rem;
+      color: var(--text-color);
+  }
+  .nav-container{
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+  }
+  .icon{
+      margin-left: 0rem;
+      border-radius: 50%;
+  }
+  #profile{
+      font-size: 32px;
+      height: 3rem;
+      width: 3rem;
+      text-align: center;
+      position: relative;
+      left: 0;
+      top: 0;
+      background-color: var(--bg-color);
+      border: none;
+  }
+  footer{
+      padding: 1.5rem;
+  }
+  footer h2, p{
+      font-size: 0.6rem;
+  }     
+  .home{
+      display: flex;
+      align-items: center;
+      flex-direction: column-reverse;
+  }
+  .task{
+      height: 50%;
+      width: 80%;
+      background-color: var(--quaternary-bg-color);
+      visibility: hidden;;
+  }
+  .quotes_container {
+      width: 80%;
+      height: 40%;
+  }
+  
+  .slideshow-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: var(--quaternary-bg-color);
+      border-radius: 15px;
+      border: 1px ;
+      overflow: hidden;
+    }
+    
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      border-radius: 15px;
+      transition: opacity 5s ease- out;
+    }
+    .section2{
+      height: 100%;
+      width: 100%;
+      background-color: var(--secondary-bg-color);
+      overflow: visible;
+      z-index: -2;
+  }
+  
+  .section2::before,
+  .section2::after {
+      content: '';
+      width: 100%;
+      height: 25%;
+      position: absolute;
+      bottom: 0;
+      background: inherit;
+      z-index: -2;
+      transform-origin: right top;
+      transform: skewY(0deg);
+  
+  }
+  .section2:after {
+      transform-origin: left bottom;
+      transform: skewY(-5deg);
+  }
+  /* ----------------------------------------------------Music---------------------------------------------- */
+  .music-icon img{
+    position: relative;
+      margin: 0.5rem 1rem 0.5rem 1rem;
+      border: 2px solid black;
+      border-radius: 50%;
+      background-color: var(--tertiary-bg-color);
+      padding: 0.5rem;
+      transition: transform 0.3s;
+      visibility: visible;
+  }
+
+  .music-icon img:hover {
+      transform: scale(1.1);
+    }
+    
+    .playlist-menu,
+    .songs-list,
+    .music-player-side {
+      display: none;
+      padding: 10px;
+    }
+    
+    .playlist-menu {
+      position: absolute;
+      top: 5px;
+      left: 95px;
+      background-color: var(--tertiary-bg-color);
+      border-radius: 5px;
+      flex-direction: column;
+      visibility: visible;
+    }
+    
+    .playlist-menu button{
+      font-weight: 600;
+      visibility: visible;
+    }
+    
+    .songs-list {
+      position: absolute;
+      width:auto;
+      top: 5px;
+      left: 95px;
+      background-color: var(--tertiary-bg-color);
+      border-radius: 5px;
+      visibility: visible;
+    }
+    .songs-list button{
+      background-color: var(--tertiary-bg-color);
+      visibility: visible;
+      width:auto;
+    }
+    
+    .music-player-side {
+      top: 50px;
+      right: -20px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      visibility: visible;
+    }
+    
+    .playlist-menu button,
+    .songs-list li {
+      margin: 5px 0;
+      padding: 10px;
+      border: none;
+      background: var(--bg-color);
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+      list-style: none;
+      visibility: visible;
+    }
+    
+    .playlist-menu button:hover,
+    .songs-list li:hover {
+      background: #e0e0e0;
+      visibility: visible;
+    }
+    audio {
+      width: 200px;
+
+    }
+    
+  .task-icon img{
+    visibility:hidden;
+    }
+  .motivate{
+    width: 90%;
+  }
+  .motivate p{
+    width: 100%;
+    padding: 1rem;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: justify;
+  }
+
+}
