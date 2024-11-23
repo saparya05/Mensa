@@ -108,3 +108,21 @@ window.onload = function() {
     setInterval(changeSlide, 15000); // Change slide every 7 seconds
   };
   
+// -------------------------------------------Signup---------------------------------------------
+
+// Function to toggle the dropdown menu
+function toggleMenu2() {
+    const menu = document.getElementById('menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+// Close the dropdown if clicking outside
+document.addEventListener('click', function (event) {
+    const profile = document.getElementById('profile');
+    const menu = document.getElementById('menu');
+
+    // Check if the click is outside the profile icon and menu
+    if (!profile.contains(event.target) && !menu.contains(event.target)) {
+        menu.style.display = 'none';
+    }
+});
