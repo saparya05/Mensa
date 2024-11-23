@@ -56,6 +56,7 @@ function selectCategory(category) {
 
     songsList.style.display = 'block';
     playlistMenu.style.display = 'none';
+    
 }
 
 // Play a selected track
@@ -84,44 +85,42 @@ function closeMusicPlayer() {
 }
 
 
+
 // --------------------------------------------------SlideShow-----------------------------------------------
 window.onload = function() {
     const slides = document.querySelectorAll('.slide');
     let currentSlide = 0;
   
-    // Function to change the active slide
+
     function changeSlide() {
-      // Remove active class from all slides
+
       slides.forEach((slide, index) => {
         slide.classList.remove('active');
       });
   
-      // Add active class to the current slide
+
       slides[currentSlide].classList.add('active');
   
-      // Increment slide index, reset to 0 when it reaches the end
+
       currentSlide = (currentSlide + 1) % slides.length;
     }
   
-    // Start the slideshow
     changeSlide();
-    setInterval(changeSlide, 15000); // Change slide every 7 seconds
+    setInterval(changeSlide, 15000); 
   };
   
 // -------------------------------------------Signup---------------------------------------------
 
-// Function to toggle the dropdown menu
 function toggleMenu2() {
     const menu = document.getElementById('menu');
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 
-// Close the dropdown if clicking outside
+// Close the menu if clicking outside
 document.addEventListener('click', function (event) {
     const profile = document.getElementById('profile');
     const menu = document.getElementById('menu');
 
-    // Check if the click is outside the profile icon and menu
     if (!profile.contains(event.target) && !menu.contains(event.target)) {
         menu.style.display = 'none';
     }

@@ -13,7 +13,7 @@
     <header>
         <div class="name">
             <div class="logo"></div>
-            <h1>Mensa</h1>
+            <h1><a href="{% url 'index' %}">Mensa</a></h1>
         </div>
         <div class="nav-container">
             <nav class="navbar">
@@ -24,29 +24,26 @@
             <i class="icon" id="bell"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAXBJREFUSEvN1TFIVlEYxvGftBUNSeBQJAUGgUN7DkFKQ0uhRM6tbSW1aYMEBY3R7CIR0SolBQrtDQkORumQCEKC4BCo98C9Eef7jufcROqMh+c8/+e873vP7XHEq+eI/bUB3MZMHWgcb0vClQCO4y6mcbI23cJjvMTOQaAcYBizOJ0w2cAYFlOQgwC38BrH8AYv8KE2uoZ7uIlfuIH33SApQB9WcAL38TyRcLLan8I6BrAd61KAZ5X4AV7hTqaZc7ieCpICfMc5XMbnDGAE7/CpKtOV0hvs1cJQ/90MoBeb+IlTbQG5KWv8mkAd+pRB8kDiNv8XIDQ3NDmstiXqx+qft4wNzmIB5/EFgyXvDZaqkb6ErxjCj+ZcDFjGxW7CDOhMHexCHCwGNM0KZVorTN/IQnm+xaVNAVp6d8h/+8aAj7h6SPd5hK+71ZT8NbN0DB/hSUR5iKc5cikg6MILO1obhv/DBJqhSHJKAbmg/w6wD/efPhleZwE2AAAAAElFTkSuQmCC"/></i>
 
             <div class="icon" id="profile" onclick="toggleMenu2()" style="cursor: pointer;">
+                {% if user.is_authenticated %}
+                    <span>{{ user.username|slice:":1"|upper }}</span> 
+                {% else %}
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAURJREFUSEvF1L8rRXEYx/HXTWaEwSiZLIpVRgulKBaLzWLwa7QopURS/gRZ5FcW/wAlGWQiIykMKKX8OKdc3c69557bOW6+2znn+3zen+fp85ycKp9clfVVCujFIjp+DF1gDsdJBisBjGKTIjOfGMRBOUgSoB43aIgRuUMb3uIgSYDQ4U7CGPpwlBYwjeUEwBRW0wIGsJ8A6MdhWkAdrtEUI3CPdrykBYR1I9gqIRCmaAi7WVKUr+3B0s8efOASszj5iz1I0ij7PSmmmcTD4nKAZswEm9oVzLkTjRHaI85xihU8lHITBxgLBNeDfIcpquQ8YRx70culAJPBr2GtEtUSd4axXfg+CmjFFWpSAl4RavyOKwrYwERK8XzZfGBwIf8QBdyiJSPgDN1xgHfUZgQ8F4Yj2sFXRvEi4/+6aH/STNU7+AYkwS0ZwQsJ3gAAAABJRU5ErkJggg==" />
+                {% endif %}
             </div>
-            
+
             <div id="menu" class="dropdown-menu">
                 {% if user.is_authenticated %}
                     <a href="{% url 'logout' %}">Logout</a>
                 {% else %}
                     <a href="{% url 'signup' %}">Sign Up</a>
                     <a href="{% url 'login' %}">Login</a>
+                    
                 {% endif %}
-            </div>
-            
-                        
+            </div>    
             
             <i class='menu' id="menu-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAExJREFUSEtjZKAxYKSx+QyjFhAM4QEJov8EnYVfAYqjsfmA5hZQ6AFU7QMSBzT3Ac3jgOYW0DyIhr4FNI8Dmlsw9ONg1AcoIUDz0hQAbegGGXzv/l0AAAAASUVORK5CYII="/></i>
         </div>
     </header>
-
-    {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}</p>
-    {% endif %}
-    {% block content %}
-    {% endblock %}
 
     {% block body %}
     {% endblock %}
