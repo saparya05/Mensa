@@ -563,14 +563,14 @@ footer h2, p{
 
 }
 
-.form-container {
-  max-width: 400px;
+/* form {
+  max-width: 80%;
   margin: auto;
-  padding: 20px;
-  background-color: #f5f5f5;
+  padding: 50px;
+  background-color: var(--quaternary-bg-color);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .custom-btn {
   display: block;
@@ -650,3 +650,48 @@ footer h2, p{
 #menu a:hover {
   background-color: var(--bg-color);
 }
+
+/* --------------------------------------------------Sign up--------------------------------------------- */
+
+.signup-container, .login-container{
+  width: 100%;
+ display: flex;
+ justify-content: center;
+}
+
+.signup, .login{
+  width: 35%;
+  background-color: var(--bg-color);
+  list-style: none;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  align-items: center;
+  margin: 2rem;
+}
+form ul{
+  list-style: none;
+  padding: 0.5rem 0;
+}
+form ul li{
+  font-size: 13px;
+  color: #5a5a5a;
+}
+form p{
+  font-size: 13px;
+  color: #5a5a5a;
+  margin: 0.2rem 0;
+}
+form p label{
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+form input{
+  margin-top: 0.2rem;
+}
+form p a{
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text-color);
+}
+/* ---------------------------------------------------Activities------------------------------------------ */
