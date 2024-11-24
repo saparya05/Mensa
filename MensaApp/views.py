@@ -36,3 +36,7 @@ def logout_view(request):
 @login_required
 def activities(request):
     return render(request, 'activities.html')
+
+@login_required
+def diary(request):
+    return render(request, 'diary.html')
