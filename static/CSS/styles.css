@@ -696,6 +696,21 @@ form p a{
 }
 /* ---------------------------------------------------Activities------------------------------------------ */
 .activity_item{
+  width: 100%;
+  height: 40%;
   display: flex;
-
+  justify-content: center;
+}
+.act_container, .act_para{
+  width: 50%;
+}
+.act_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.act_container a{
+    background-color: var(--bg-color);
+    text-decoration: none;
+    color: var(--text-color);
 }
