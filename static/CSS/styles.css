@@ -713,4 +713,11 @@ form p a{
     background-color: var(--bg-color);
     text-decoration: none;
     color: var(--text-color);
+    padding: 6rem 8rem;
+    margin: 2rem;
+    border-radius: 10px;
+}
+.act_para{
+  text-align: justify;
+  padding: 4rem;
 }
