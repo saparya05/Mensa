@@ -4,4 +4,44 @@
 
 {% block body %}
 
+<h2 class="diary_heading">Your Personal Diary</h2>
+
+<form method="POST" class="diary_form">
+    {% csrf_token %}
+    <input type="hidden" name="entry_id" id="entry-id" value="">
+    <input type="hidden" name="action" id="action" value="add">
+
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" placeholder="Entry Title">
+    <br>
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" rows="20" placeholder="Write your thoughts here..." required></textarea>
+    <br>
+    <button class="diary_btn" type="submit">Save</button>
+</form>
+
+<h3 class="diary_head2">Your Entries</h3>
+{% for entry in entries %}
+<div class="diary_div" style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;">
+    <h4>{{ entry.title|default:"Untitled" }}</h4>
+    <p class="diary_preview">{{ entry.content.splitlines|first }}</p>
+    <small>Written on {{ entry.created_at|date:"F j, Y, g:i a" }}</small>
+
+    <button class="diary_icon1" onclick="editEntry({{ entry.id }}, '{{ entry.title|escapejs }}', '{{ entry.content|escapejs }}')">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAPJJREFUSEvFk7EOAUEQhr97AgqRaKm9gMYL0VHRiFCg9EYSb6CSaFUSegk3yRXr7O7s3d7ltt3d75v9Zzah5pXUzCdWsAbewMpVaIxgD8wy8Bw42CRlBR3gAnQN6BLY5CVlBG3gCQyAE9DLoAtgGyuYpJlLpSPgBvSBcxZPdESSt+Qu6w6MgSvQAl6xTZYm7nIQkQyBh2/UQ3pgVm6yjil8qv0jTRAFF7lP4IJLMyWyoOUSVAJ3vaAyuEvwsby9UCzmfVtEeUFpeMgLouDaFAVNiXZI+wfafXW/EYFtitRKjQM/RYdMURH4X18biahoxd7zXwouJhn8uXp/AAAAAElFTkSuQmCC"/>
+    </button>
+
+    <form method="POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this entry?')">
+        {% csrf_token %}
+        <input type="hidden" name="entry_id" value="{{ entry.id }}">
+        <input type="hidden" name="action" value="delete">
+        <button class="diary_icon2" type="submit"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAJdJREFUSEvtlbENgCAQRR+Fm1jpCo7hEA5h7wjGHZzBAew1cRYLDYmRqMEjBqyg5ee/498BisBLBfbHBVABraUQvde9FSkBCmAAEovJCmjNaIPcAZunyE7f3wGeDmBsbD34GtXDLwLuPYsRiVMcI4oRmQSCv0UTkImJXwUzkItX+xCUQAOkjpAFqIHeFeDoK8ukP1l2EBQ77EwZGTyUyKgAAAAASUVORK5CYII="/></button>
+    </form>
+</div>
+{% endfor %}
+
+{% if not entries %}
+<p class="diary_p">No entries yet. Start by writing something above!</p>
+{% endif %}
+
 {% endblock %}

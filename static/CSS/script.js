@@ -147,3 +147,15 @@ function isInViewport(element) {
   }
   
   window.addEventListener('scroll', handleScroll);
+
+
+// ------------------------------------------------------diary-entry-----------------------------------
+
+function editEntry(entryId, title, content) {
+    // Populate the form with the entry's data
+    document.getElementById('entry-id').value = entryId;
+    document.getElementById('title').value = title;
+    document.getElementById('content').value = content;
+    document.getElementById('action').value = 'edit';
+    window.scrollTo(0, 0); // Scroll to the top where the form is
+}
