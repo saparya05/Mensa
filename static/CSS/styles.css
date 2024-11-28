@@ -83,8 +83,6 @@ footer{
     height: 3.5rem;
     width: 100%;
     text-align: center;
-    position: fixed;
-    bottom: 0;
     background-color: var(--secondary-bg-color);
 }
 footer h2, p{
@@ -708,16 +706,56 @@ form p a{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2rem;
 }
 .act_container a{
-    background-color: var(--bg-color);
     text-decoration: none;
     color: var(--text-color);
-    padding: 6rem 8rem;
-    margin: 2rem;
-    border-radius: 10px;
+    font-weight: 600;
+    font-size: 30px;
+    text-shadow: 0 2px 4px var(--text-color);
 }
 .act_para{
   text-align: justify;
   padding: 4rem;
+}
+.img_cont1{
+  height: 15rem;
+  width: 25rem;
+  background-image: url("/static/CSS/images/Image 8.jpg");
+  background-size: cover;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img_cont2{
+  height: 15rem;
+  width: 25rem;
+  background-image: url("/static/CSS/images/Image 9.jpg");
+  background-size: cover;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img_cont3{
+  height: 15rem;
+  width: 25rem;
+  background-image: url("/static/CSS/images/Image 10.jpg");
+  background-size: cover;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img_cont4{
+  height: 15rem;
+  width: 25rem;
+  background-image: url("/static/CSS/images/Image 11.jpg");
+  background-size: cover;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
