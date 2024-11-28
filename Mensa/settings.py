@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 'corsheaders',
     'MensaApp',
 ]
 
@@ -49,7 +50,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # 'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'Mensa.urls'
 
@@ -130,3 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 LOGIN_URL = '/login/'
+
+
+
+# OPENAI_API_KEY = b'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'

@@ -152,10 +152,60 @@ function isInViewport(element) {
 // ------------------------------------------------------diary-entry-----------------------------------
 
 function editEntry(entryId, title, content) {
-    // Populate the form with the entry's data
+ 
     document.getElementById('entry-id').value = entryId;
     document.getElementById('title').value = title;
     document.getElementById('content').value = content;
     document.getElementById('action').value = 'edit';
-    window.scrollTo(0, 0); // Scroll to the top where the form is
+    window.scrollTo(0, 0);
+}
+
+
+// ------------------------------------------------------------Chatbot------------------------------------------
+
+function updateChatBox(message, sender) {
+    const chatBox = document.getElementById('chat-box');
+    const messageElement = document.createElement('div');
+    messageElement.className = 'chat-bubble ' + sender;
+    messageElement.textContent = message;
+    chatBox.appendChild(messageElement);
+}
+
+function sendText() {
+    const userMessage = document.getElementById('user-message').value;
+    if (userMessage) {
+        updateChatBox(userMessage, 'user');
+        fetch('/chat/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: userMessage })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.text) {
+                updateChatBox(data.text, 'bot');
+                // Play bot response speech
+                const audio = new Audio('data:audio/mp3;base64,' + data.speech);
+                audio.play();
+            }
+        });
+    }
+}
+function startSpeechRecognition() {
+    fetch('/speech-to-text/', {
+        method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.text) {
+            document.getElementById('speech-output').textContent = data.text;
+            // Optionally, you can use the text for chatbot input
+            sendText(data.text);
+        } else {
+            document.getElementById('speech-output').textContent = 'Error: ' + data.error;
+        }
+    })
+    .catch(err => {
+        console.error('Error:', err);
+    });
 }
