@@ -125,3 +125,25 @@ document.addEventListener('click', function (event) {
         menu.style.display = 'none';
     }
 });
+
+// ---------------------------------------------activity fade----------------------------------------------------
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    const offset = 100; // Trigger when 100px away from the viewport
+    return rect.top <= window.innerHeight - offset && rect.bottom >= offset;
+  }
+  
+  
+  // Function to toggle fade-in and fade-out
+  function handleScroll() {
+    const elements = document.querySelectorAll('.activity_item');
+    elements.forEach(element => {
+      if (isInViewport(element)) {
+        element.classList.add('visible'); // Add class when in view
+      } else {
+        element.classList.remove('visible'); // Remove class when out of view
+      }
+    });
+  }
+  
+  window.addEventListener('scroll', handleScroll);
