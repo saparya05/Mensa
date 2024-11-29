@@ -3,13 +3,6 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomSignupForm, CustomLoginForm
 from .models import DiaryEntry
-import speech_recognition as sr
-from gtts import gTTS
-from transformers import pipeline
-from django.http import JsonResponse
-from django.shortcuts import render
-import os
-from io import BytesIO
 
 
 # Create your views here.
@@ -79,51 +72,3 @@ def diary(request):
 @login_required
 def mood(request):
     return render(request, 'mood.html')
-
-
-
-# chatbot = pipeline('conversational', model='microsoft/DialoGPT-medium')
-
-def chatbot(request):
-    if request.method == 'POST':
-        user_message = request.POST.get('message')
-        
-        if user_message:
-            # Generate response from the chatbot
-            response = chatbot(user_message)
-            bot_reply = response[0]['generated_text']
-            
-            # Convert bot reply to speech
-            tts = gTTS(text=bot_reply, lang='en')
-            speech_fp = BytesIO()
-            tts.save(speech_fp)
-            speech_fp.seek(0)
-            
-            # Return bot's response in text and speech
-            return JsonResponse({
-                'text': bot_reply,
-                'speech': speech_fp.getvalue().decode('ISO-8859-1')  # Convert to a string format suitable for transfer
-            })
-        else:
-            return JsonResponse({'error': 'No message provided'}, status=400)
-    
-    return render(request, 'chat/chatbot.html')
-
-def speech_to_text(request):
-    recognizer = sr.Recognizer()
-
-    # Record audio from the user's microphone
-    with sr.Microphone() as source:
-        print("Please say something...")
-        audio = recognizer.listen(source)
-
-    try:
-        # Recognize the speech and convert to text
-        user_input = recognizer.recognize_google(audio)
-        print("You said: " + user_input)
-
-        return JsonResponse({'text': user_input})
-    except sr.UnknownValueError:
-        return JsonResponse({'error': 'Sorry, I could not understand the audio.'}, status=400)
-    except sr.RequestError:
-        return JsonResponse({'error': 'Could not request results from Google Speech Recognition service.'}, status=500)

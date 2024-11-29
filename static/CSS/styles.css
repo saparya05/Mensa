@@ -854,7 +854,3 @@ form p a{
   margin-bottom: 5px;
 }
 
-.chat-box { width: 400px; height: 500px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; }
-        .chat-bubble { margin-bottom: 15px; }
-        .bot { color: blue; }
-        .user { color: green; }
