@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Notifications{% endblock %}
+
+{% block body %}
+<section class="notifications">
+    <h1>Notifications</h1>
+    <ul>
+        {% for notification in notifications %}
+        <li {% if not notification.is_read %}class="unread"{% endif %}>
+            {{ notification.content }}
+            <small>{{ notification.created_at }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

@@ -161,5 +161,14 @@ function editEntry(entryId, title, content) {
 }
 
 
-// ------------------------------------------------------------Chatbot------------------------------------------
+// ------------------------------------------------------------Notification------------------------------------------
 
+document.addEventListener("DOMContentLoaded", () => {
+    const bell = document.getElementById("notification-bell");
+
+    if (bell) {
+        bell.addEventListener("click", () => {
+            alert("Redirecting to Notifications...");
+        });
+    }
+});

@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # 'corsheaders',
     'MensaApp',
+    'django_cron',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +139,7 @@ LOGIN_URL = '/login/'
 
 
 # OPENAI_API_KEY = b'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'
+
+CRON_CLASSES = [
+    'health.cron.NotificationCronJob',
+]

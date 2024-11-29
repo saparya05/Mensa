@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Medications{% endblock %}
+
+{% block body %}
+<section class="medications">
+    <h1>Medications</h1>
+    <form method="POST" class="health-tracker-form">
+        {% csrf_token %}
+        <label for="name">Medication Name:</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="dosage">Dosage:</label>
+        <input type="text" name="dosage" id="dosage" required>
+
+        <label for="schedule_time">Schedule (Time):</label>
+        <input type="time" name="schedule_time" id="schedule_time" required>
+
+        <label for="notes">Notes:</label>
+        <textarea name="notes" id="notes" rows="3"></textarea>
+
+        <button type="submit">Add Medication</button>
+    </form>
+
+    <h2>Current Medications</h2>
+    <ul>
+        {% for medication in medications %}
+        <li>
+            <strong>{{ medication.name }}</strong> - {{ medication.dosage }} at {{ medication.schedule_time }}
+            {% if medication.notes %}<br>Notes: {{ medication.notes }}{% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomSignupForm, CustomLoginForm
-from .models import DiaryEntry
+from .models import DiaryEntry ,HealthMetric, Appointment, Medication, Notification
+from datetime import datetime, timedelta
 
 
 # Create your views here.
@@ -72,3 +73,78 @@ def diary(request):
 @login_required
 def mood(request):
     return render(request, 'mood.html')
+
+
+
+@login_required
+def health_tracker(request):
+    if request.method == "POST":
+        weight = request.POST.get("weight")
+        sleep_hours = request.POST.get("sleep_hours")
+        exercise_duration = request.POST.get("exercise_duration")
+        HealthMetric.objects.create(
+            user=request.user,
+            weight=weight,
+            sleep_hours=sleep_hours,
+            exercise_duration=exercise_duration,
+        )
+        Notification.objects.create(
+            user=request.user, content="Health metrics updated successfully!"
+        )
+        return redirect("health_tracker")
+    metrics = HealthMetric.objects.filter(user=request.user).order_by("-date")
+    return render(request, "health_tracker.html", {"metrics": metrics})
+
+
+@login_required
+def appointments(request):
+    if request.method == "POST":
+        doctor_name = request.POST.get("doctor_name")
+        date = request.POST.get("date")
+        time = request.POST.get("time")
+        location = request.POST.get("location")
+        reason = request.POST.get("reason")
+        Appointment.objects.create(
+            user=request.user,
+            doctor_name=doctor_name,
+            date=date,
+            time=time,
+            location=location,
+            reason=reason,
+        )
+        Notification.objects.create(
+            user=request.user, content=f"Appointment with {doctor_name} added."
+        )
+        return redirect("appointments")
+    appointments = Appointment.objects.filter(user=request.user).order_by("date")
+    return render(request, "appointments.html", {"appointments": appointments})
+
+
+@login_required
+def medications(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        dosage = request.POST.get("dosage")
+        schedule_time = request.POST.get("schedule_time")
+        notes = request.POST.get("notes")
+        Medication.objects.create(
+            user=request.user,
+            name=name,
+            dosage=dosage,
+            schedule_time=schedule_time,
+            notes=notes,
+        )
+        Notification.objects.create(
+            user=request.user, content=f"Medication {name} added to your schedule."
+        )
+        return redirect("medications")
+    medications = Medication.objects.filter(user=request.user)
+    return render(request, "medications.html", {"medications": medications})
+
+
+@login_required
+def notifications(request):
+    notifications = Notification.objects.filter(user=request.user).order_by(
+        "-created_at"
+    )
+    return render(request, "notifications.html", {"notifications": notifications})
