@@ -148,3 +148,19 @@ def notifications(request):
         "-created_at"
     )
     return render(request, "notifications.html", {"notifications": notifications})
+
+@login_required
+def mini_games(request):
+    return render(request, 'mini_games.html')
+
+@login_required
+def meditation_exercise(request):
+    return render(request, 'meditation_exercise.html')
+
+@login_required
+def SBE(request):
+    return render(request, 'SBE.html')
+
+@login_required
+def Selfcare(request):
+    return render(request, 'Selfcare.html')

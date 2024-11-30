@@ -5,7 +5,7 @@
 {% block body %}
 <div class="activity_item1">
     <div class="act_container">
-        <div class="img_cont1"><a href="#">Meditation / Exercise</a></div>
+        <div class="img_cont1"><a href="{% url 'meditation_exercise' %}">Meditation / Exercise</a></div>
     </div>
     <div class="act_para">
         <p class="para_act">
@@ -23,12 +23,12 @@
             clarity and confidence.</p>
     </div>
     <div class="act_container">
-        <div class="img_cont2"><a href="#">Skill Building Exercise</a></div>
+        <div class="img_cont2"><a href="{% url 'SBE' %}">Skill Building Exercise</a></div>
     </div>
 </div>
 <div class="activity_item">
     <div class="act_container">
-        <div class="img_cont3"><a href="#">Selfcare</a></div>
+        <div class="img_cont3"><a href="{% url 'Selfcare' %}">Selfcare</a></div>
     </div>
     <div class="act_para">
         <p class="para_act">Self-care is essential for maintaining physical, mental, and emotional well-being. It helps
@@ -46,7 +46,7 @@
             well-being and managing anxiety.</p>
     </div>
     <div class="act_container">
-        <div class="img_cont4"><a href="#">Mini-Games</a></div>
+        <div class="img_cont4"><a href="{% url 'mini_games' %}">Mini-Games</a></div>
     </div>
 </div>
 {% endblock %}

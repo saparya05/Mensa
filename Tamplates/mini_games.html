@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Mini-games{% endblock %}
+
+{% block body %}
+<div class="mini_games">
+    <h1 class="mg">Rock Paper Scissor</h1>
+    <div class="choices">
+        <div class="choice" id="rock">
+            <img class="img_mg" src="/static/CSS/images/Stone.png">
+        </div>
+        <div class="choice" id="paper">
+            <img class="img_mg" src="/static/CSS/images/Paper.png">
+        </div>
+        <div class="choice" id="scissor">
+            <img class="img_mg" src="/static/CSS/images/Scissor.png">
+        </div>
+    </div>
+    <div class="score_board">
+        <div class="score">
+            <p id="user_score">0</p>
+            <p>You</p>
+        </div>
+        <div class="score">
+            <p id="computer_score">0</p>
+            <p>Computer</p>
+        </div>
+    </div>
+    <div class="message_container">
+        <p id="message">Play Your Move</p>
+    </div>
+</div>
+{% endblock %}

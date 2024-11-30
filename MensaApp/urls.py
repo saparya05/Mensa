@@ -12,4 +12,8 @@ urlpatterns = [
     path("appointments/", views.appointments, name="appointments"),
     path("medications/", views.medications, name="medications"),
     path("notifications/", views.notifications, name="notifications"),
+    path("mini_games/", views.mini_games, name="mini_games"),
+    path("meditation_exercise/", views.meditation_exercise, name="meditation_exercise"),
+    path("SBE/", views.SBE, name="SBE"),
+    path("Selfcare/", views.Selfcare, name="Selfcare"),
 ]

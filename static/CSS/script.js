@@ -172,3 +172,72 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// ------------------------------------------------------------MIni-game------------------------------------------
+
+
+let userScore=0;
+let computerScore=0;
+
+const choices = document.querySelectorAll(".choice");
+const message = document.querySelector("#message");
+const userScorePara = document.querySelector("#user_score");
+const computerScorePara = document.querySelector("#computer_score");
+
+const genComputerChoice = () => {
+    const options = ["rock", "paper", "scissor"];
+    const ranindx = Math.floor(Math.random() * 3);
+    return options[ranindx];
+    //Rock Paper Scissor
+}
+
+const drawGame = () => {
+    message.innerText = "Game was Draw! Play Again";
+    message.style.backgroundColor = "rgb(6, 9, 36)"; 
+}
+
+const showWinner = (userWin, userChoice, compChoice) => {
+    if(userWin) {
+        userScore++;
+        userScorePara.innerText=userScore;
+        message.innerText = `You Wins! Your ${userChoice} beats ${compChoice}`
+        message.style.backgroundColor = "green"; 
+    } else{
+        computerScore++;
+        computerScorePara.innerText=computerScore;
+        message.innerText = `You Lose! ${compChoice} beats your ${userChoice}` 
+        message.style.backgroundColor = "red"; 
+    }
+}
+
+const playGame =  (userChoice) => {
+    console.log("user choice = ", userChoice)
+    const compChoice = genComputerChoice();
+    console.log("Computer choice = ", compChoice);
+    // Generate computer choice
+    if (userChoice === compChoice){
+        //Draw Game
+        drawGame();
+    }
+    else{
+        let userWin = true;
+        if (userChoice==="rock") {
+            //scissor, paper
+            userWin = compChoice === "paper" ? false : true;
+        } else if (userChoice === "paper") {
+            // rock, scissor
+            userWin = compChoice === "scissor" ? false : true;
+        } else {
+            // rock, paper
+            userWin = compChoice === "rock" ? false : true;
+        }
+        showWinner(userWin, userChoice, compChoice);
+    }
+}
+
+choices.forEach((choice) => {
+    choice.addEventListener("click", () => {
+        const userChoice = choice.getAttribute("Id");
+        playGame(userChoice);
+    })
+})

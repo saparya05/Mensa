@@ -932,3 +932,68 @@ table th, table td {
 .notifications ul li{
   margin: 1rem 3rem;
 }
+
+.mini_games .mg{
+  color: var(--text-color);
+  height: 5rem;
+  line-height: 5rem;
+  text-align: center;
+}
+
+
+.mini_games .choices{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-top:2rem;
+}
+
+.mini_games .choice{
+  height: 165px;
+  width: 165px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mini_games .choice:hover{
+  opacity: 0.8;
+  background-color: var(--bg-color);
+  cursor: pointer;
+}
+
+.mini_games .img_mg{
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.mini_games .score_board{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  margin-top: 3rem;
+  gap: 5rem;
+}
+
+.mini_games #user_score, #computer_score{
+  font-size: 4rem;
+}
+
+.mini_games .message_container{    
+  margin: 4rem 0 3rem;
+  text-align: center;
+  
+}
+
+.mini_games #message{
+  background-color: rgb(6, 9, 36);
+  color: rgb(210, 210, 210);
+  font-size: 2rem;
+  display: inline;
+  padding: 1rem;
+  border-radius: 1rem;
+}
