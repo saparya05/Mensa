@@ -716,6 +716,7 @@ form p a{
     font-size: 30px;
     text-shadow: 2px 2px 3px var(--text-color);
 }
+
 .act_para{
   text-align: justify;
   padding: 4rem 0;
@@ -990,10 +991,212 @@ table th, table td {
 }
 
 .mini_games #message{
-  background-color: rgb(6, 9, 36);
+  background-color: var(--bg-color);
   color: rgb(210, 210, 210);
   font-size: 2rem;
   display: inline;
   padding: 1rem;
   border-radius: 1rem;
 }
+/* ----------------------------------------------Exe/med------------------------------------------ */
+
+.importance_of_meditation .medit{
+  text-align: center;
+  margin: 2rem;
+  text-decoration: underline;
+  font-size: 2.5rem;
+}
+.importance_of_meditation p{
+  font-size: 18px;
+}
+.importance_of_meditation .medp{
+  margin: 1rem 3rem;
+}
+.importance_of_meditation .medp2{
+  margin: 1rem 0;
+}
+.importance_of_meditation .medit_h1{
+  margin: 0 2rem;
+}
+.importance_of_meditation h2{
+  margin: 2rem;
+}
+.importance_of_meditation ul li{
+  margin-left: 2.5rem;
+  list-style-type: decimal;
+}
+.importance_of_meditation ul li img{
+width: 100%;
+padding: 1rem 10rem 1rem 9rem;
+}
+
+.activity_meditation, .activity_exer{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+.actmed_para .actmed_container, .actexer_container .actexer_para{
+  width: 50%;
+}
+iframe{
+  border-radius: 1rem;
+}
+.para_medact{
+  padding: 3rem;
+  text-align: justify;
+  font-size: 20px;
+}
+/* ----------------------------------------------Selfcare------------------------------------------ */
+.self{
+  height: 670px;
+  background-image: url("/static/CSS/images/Selfcare.jpg");
+  background-image:linear-gradient(to top, rgba(0, 0, 0, 0.878) 0, rgba(0, 0, 0, 0.404) 60%, rgba(0, 0, 0, 0.8) 100%), url("/static/CSS/images/Selfcare.jpg");
+  background-size: cover;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.self p{
+  color: var(--bg-color);
+  font-size: 5rem;
+  font-weight: 900;
+  text-shadow: 2px 2px 5px var(--text-color);
+}
+.self_care{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+.f, .p{
+  width: 50%;
+}
+.f{
+  padding: 4rem 4rem 6rem 4rem;
+}
+.f iframe{
+  width: 100%;
+  border: 1px solid var(--text-color);
+}
+.p p{
+  padding: 2rem;
+  font-size: 25px;
+  text-align: justify;
+}
+.diet{
+  padding: 2rem;
+}
+.diet h1{
+  text-align: center;
+  font-size: 3rem;
+  text-decoration: underline;
+  margin-bottom: 2rem;
+}
+.diet p{
+  font-size: 20px;
+  text-align: justify;
+}
+.diet .heart{
+  margin: 1rem;
+}
+.diet .heart li{
+  margin-left: 1rem;
+  font-size: 20px;
+  color: #1a1a1a;
+}
+.diet h2{
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+.diet img{
+  border-radius: 50%;
+}
+.diet .main{
+  list-style-type:decimal;
+}
+.diet .main li h3{
+  margin: 1rem 0;
+  font-size: 20px;
+}
+.diet .main li li{
+  margin: 0.2rem 1.5rem;
+  text-align: justify;
+  color: #1a1a1a;
+  list-style-type: disc;
+}
+.diet .tips li{
+  margin: 0.5rem;
+  list-style-type: decimal;
+}
+.scmh{
+  padding: 2rem;
+}
+.scmh h1{
+  margin: 1rem 0;
+}
+.scmh p{
+  text-align: justify;
+  font-size: 20px;
+}
+.scmh .selfcaretips li{
+  margin: 0.5rem 1rem;
+  text-align: justify;
+  font-size: 20px;
+  color: #1a1a1a;
+}
+
+.act_container2 {
+padding: 2rem;
+}
+.act_container2 h1 {
+  text-align: center;
+  color: var(--tertiary-bg-color);
+}
+
+.act_container2 {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--bg-color);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.act_container2 .exercise {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: var(--quaternary-bg-color);
+}
+
+.act_container2 label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.act_container2 input, .act_container2 textarea, .act_container2 button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.act_container2 button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.act_container2 button:hover {
+  background-color: #45a049;
+}
+

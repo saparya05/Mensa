@@ -53,3 +53,20 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"Notification for {self.user.username} - {self.content}"
+
+class CBTExercise(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    template = models.JSONField()  # Store templates like Thought Record
+
+    def __str__(self):
+        return self.title
+
+class CBTProgress(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    exercise = models.ForeignKey(CBTExercise, on_delete=models.CASCADE)
+    response = models.JSONField()  # Store user responses dynamically
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.exercise.title}"

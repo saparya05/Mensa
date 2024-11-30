@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomSignupForm, CustomLoginForm
-from .models import DiaryEntry ,HealthMetric, Appointment, Medication, Notification
+from .models import DiaryEntry ,HealthMetric, Appointment, Medication, Notification, CBTExercise, CBTProgress
 from datetime import datetime, timedelta
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -157,10 +158,11 @@ def mini_games(request):
 def meditation_exercise(request):
     return render(request, 'meditation_exercise.html')
 
-@login_required
-def SBE(request):
-    return render(request, 'SBE.html')
 
 @login_required
 def Selfcare(request):
     return render(request, 'Selfcare.html')
+
+@login_required
+def skill_building_exercises(request):
+    return render(request, 'skill_building_exercises.html')

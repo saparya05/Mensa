@@ -14,6 +14,6 @@ urlpatterns = [
     path("notifications/", views.notifications, name="notifications"),
     path("mini_games/", views.mini_games, name="mini_games"),
     path("meditation_exercise/", views.meditation_exercise, name="meditation_exercise"),
-    path("SBE/", views.SBE, name="SBE"),
     path("Selfcare/", views.Selfcare, name="Selfcare"),
+    path('skill-building-exercises/', views.skill_building_exercises, name='SBE'),
 ]

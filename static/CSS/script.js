@@ -241,3 +241,28 @@ choices.forEach((choice) => {
         playGame(userChoice);
     })
 })
+
+function submitThoughtForm() {
+    const form = document.getElementById("challenge-thoughts-form");
+    alert("Thoughts submitted! Keep practicing.");
+    form.reset();
+}
+
+function submitGratitudeForm() {
+    const form = document.getElementById("gratitude-form");
+    alert("Gratitude entries submitted!");
+    form.reset();
+}
+
+function startBreathingExercise() {
+    let step = 0;
+    const instructions = ["Inhale for 4 seconds...", "Hold your breath for 7 seconds...", "Exhale for 8 seconds..."];
+    const breathingElement = document.getElementById("breathing-instructions");
+
+    const interval = setInterval(() => {
+        breathingElement.textContent = instructions[step];
+        step = (step + 1) % instructions.length;
+    }, 4000);
+
+    setTimeout(() => clearInterval(interval), 12000); // Stops after one cycle
+}

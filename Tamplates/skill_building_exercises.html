@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Skill Building Exercises{% endblock %}
+
+{% block body %}
+
+<div class="act_container2">
+    <h1>Skill Building Exercises</h1>
+    <div class="exercise">
+        <h2>1. Identifying and Challenging Negative Thoughts</h2>
+        <p>Recognize and reframe negative thought patterns. Fill out the form below:</p>
+        <form id="challenge-thoughts-form">
+            <label for="situation">Situation:</label>
+            <input type="text" id="situation" name="situation" required><br>
+            <label for="thought">Automatic Thought:</label>
+            <input type="text" id="thought" name="thought" required><br>
+            <label for="evidence-for">Evidence For:</label>
+            <textarea id="evidence-for" name="evidence-for"></textarea><br>
+            <label for="evidence-against">Evidence Against:</label>
+            <textarea id="evidence-against" name="evidence-against"></textarea><br>
+            <button type="button" onclick="submitThoughtForm()">Submit</button>
+        </form>
+    </div>
+
+    <div class="exercise">
+        <h2>2. Gratitude Practice</h2>
+        <p>Write three things you're grateful for:</p>
+        <form id="gratitude-form">
+            <input type="text" name="gratitude1" placeholder="Gratitude 1" required><br>
+            <input type="text" name="gratitude2" placeholder="Gratitude 2" required><br>
+            <input type="text" name="gratitude3" placeholder="Gratitude 3" required><br>
+            <button type="button" onclick="submitGratitudeForm()">Submit</button>
+        </form>
+    </div>
+
+    <div class="exercise">
+        <h2>3. Breathing Exercise</h2>
+        <p>Follow the breathing instructions:</p>
+        <p id="breathing-instructions">Inhale for 4 seconds...</p>
+        <button type="button" onclick="startBreathingExercise()">Start Exercise</button>
+    </div>
+</div>
+
+{% endblock %}
