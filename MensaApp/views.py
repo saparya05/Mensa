@@ -2,9 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomSignupForm, CustomLoginForm
-from .models import DiaryEntry ,HealthMetric, Appointment, Medication, Notification, CBTExercise, CBTProgress
+from .models import DiaryEntry ,HealthMetric, Appointment, Medication, Notification, Mood, CBTExercise, CBTProgress
 from datetime import datetime, timedelta
 from django.http import JsonResponse
+import cv2
+import numpy as np
+from deepface import DeepFace
+import calendar
+from datetime import date
+from django.utils.safestring import mark_safe
 
 
 # Create your views here.
@@ -166,3 +172,62 @@ def Selfcare(request):
 @login_required
 def skill_building_exercises(request):
     return render(request, 'skill_building_exercises.html')
+
+
+def detect_mood(request):
+    if request.method == "POST" and request.is_ajax():
+        video_capture = cv2.VideoCapture(0)
+        ret, frame = video_capture.read()
+        if not ret:
+            return JsonResponse({'error': 'Unable to access camera.'}, status=400)
+
+        # Save or process the image frame for analysis
+        try:
+            analysis = DeepFace.analyze(frame, actions=['emotion'])
+            mood = analysis['dominant_emotion']
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+        # Store in database
+        date_today = datetime.date.today()
+        mood_entry, created = Mood.objects.get_or_create(user=request.user, date=date_today)
+
+        # Save mood based on time of day
+        current_hour = datetime.datetime.now().hour
+        if current_hour < 12:
+            mood_entry.morning_mood = mood
+        else:
+            mood_entry.evening_mood = mood
+
+        mood_entry.save()
+
+        video_capture.release()
+        return JsonResponse({'mood': mood})
+    return JsonResponse({'error': 'Invalid request.'}, status=400)
+
+
+@login_required
+def mood_calendar(request):
+    # Ensure the user is logged in
+    moods = Mood.objects.filter(user=request.user)
+    mood_dict = {m.date: {"morning": m.morning_mood, "evening": m.evening_mood} for m in moods}
+
+    today = date.today()
+    calendar_html = "<table class='calendar'>"
+    calendar_html += "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>"
+
+    c = calendar.Calendar()
+    for week in c.monthdatescalendar(today.year, today.month):
+        calendar_html += "<tr>"
+        for day in week:
+            if day.month == today.month:
+                mood = mood_dict.get(day, {})
+                morning = mood.get("morning", "🙂")
+                evening = mood.get("evening", "🙂")
+                calendar_html += f"<td>{day.day}<br>{morning} {evening}</td>"
+            else:
+                calendar_html += "<td></td>"
+        calendar_html += "</tr>"
+
+    calendar_html += "</table>"
+    return render(request, "mood_calendar.html", {"calendar_html": mark_safe(calendar_html)})

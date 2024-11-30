@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Your Mood Calendar{% endblock %}
+
+{% block block %}
+<h1>Your Mood Calendar</h1>
+<div class="calendar-container">
+    {{ calendar_html|safe }}
+</div>
+{% endblock %}

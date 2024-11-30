@@ -266,3 +266,18 @@ function startBreathingExercise() {
 
     setTimeout(() => clearInterval(interval), 12000); // Stops after one cycle
 }
+
+// ------------------------------------------------------------mood------------------------------------------
+
+
+document.getElementById('detect-mood').addEventListener('click', () => {
+    fetch("{% url 'detect_mood' %}", { method: 'POST', headers: { 'X-CSRFToken': '{{ csrf_token }}' } })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            document.getElementById('mood-result').innerText = `Detected Mood: ${data.mood}`;
+        }
+    });
+});

@@ -70,3 +70,12 @@ class CBTProgress(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.exercise.title}"
+    
+class Mood(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
+    morning_mood = models.CharField(max_length=50, blank=True, null=True)
+    evening_mood = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.date}"
