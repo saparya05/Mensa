@@ -173,38 +173,57 @@ def Selfcare(request):
 def skill_building_exercises(request):
     return render(request, 'skill_building_exercises.html')
 
-
+@login_required
 def detect_mood(request):
     if request.method == "POST" and request.is_ajax():
+        print("Mood detection triggered")
+        # Open the webcam and capture a single frame
         video_capture = cv2.VideoCapture(0)
         ret, frame = video_capture.read()
+        video_capture.release()
+        print("Camera Access:", ret)
+
         if not ret:
             return JsonResponse({'error': 'Unable to access camera.'}, status=400)
 
-        # Save or process the image frame for analysis
+        # Convert frame to RGB (DeepFace expects RGB images)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
         try:
+            # Analyze the frame for mood
             analysis = DeepFace.analyze(frame, actions=['emotion'])
             mood = analysis['dominant_emotion']
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
 
-        # Store in database
+        # Map detected mood to emojis
+        mood_to_emoji = {
+            "happy": "😊",
+            "sad": "😢",
+            "angry": "😡",
+            "neutral": "😐",
+            "surprise": "😂",
+            "fear": "😴",  # Replace this if better mapping fits
+            "disgust": "🤔",  # Replace this if better mapping fits
+        }
+        mood_emoji = mood_to_emoji.get(mood, "🙂")  # Default to a neutral emoji
+
+        # Store mood in the database
         date_today = datetime.date.today()
         mood_entry, created = Mood.objects.get_or_create(user=request.user, date=date_today)
 
         # Save mood based on time of day
         current_hour = datetime.datetime.now().hour
         if current_hour < 12:
-            mood_entry.morning_mood = mood
+            mood_entry.morning_mood = mood_emoji
         else:
-            mood_entry.evening_mood = mood
+            mood_entry.evening_mood = mood_emoji
 
         mood_entry.save()
 
-        video_capture.release()
-        return JsonResponse({'mood': mood})
-    return JsonResponse({'error': 'Invalid request.'}, status=400)
+        return JsonResponse({'mood': mood_emoji})
 
+    return JsonResponse({'error': 'Invalid request.'}, status=400)
 
 @login_required
 def mood_calendar(request):

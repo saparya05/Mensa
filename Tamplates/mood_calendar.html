@@ -2,7 +2,12 @@
 
 {% block title %}Your Mood Calendar{% endblock %}
 
-{% block block %}
+{% block body %}
+<div id="mood-detection">
+    <h1>Detect Your Mood</h1>
+    <button id="detect_mood">Detect Mood</button>
+    <p id="mood-result"></p>
+</div>
 <h1>Your Mood Calendar</h1>
 <div class="calendar-container">
     {{ calendar_html|safe }}

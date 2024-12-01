@@ -270,14 +270,33 @@ function startBreathingExercise() {
 // ------------------------------------------------------------mood------------------------------------------
 
 
-document.getElementById('detect-mood').addEventListener('click', () => {
-    fetch("{% url 'detect_mood' %}", { method: 'POST', headers: { 'X-CSRFToken': '{{ csrf_token }}' } })
+document.getElementById('detect_mood').addEventListener('click', () => {
+    // Display message while mood detection is in progress
+    document.getElementById('mood-result').innerText = "Detecting mood...";
+
+    fetch("{% url 'detect_mood/' %}", {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({}) // Sending an empty body as we are not passing any additional data
+    })
     .then(response => response.json())
     .then(data => {
         if (data.error) {
+            // Display error message if there is an error
             alert(data.error);
+            document.getElementById('mood-result').innerText = "Error: " + data.error;
         } else {
+            // Display the detected mood
             document.getElementById('mood-result').innerText = `Detected Mood: ${data.mood}`;
         }
+    })
+    .catch(error => {
+        // Handle any unexpected errors
+        console.error('Error:', error);
+        alert('An error occurred while detecting mood.');
+        document.getElementById('mood-result').innerText = 'An error occurred while detecting mood.';
     });
 });
