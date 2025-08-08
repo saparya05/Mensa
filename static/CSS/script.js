@@ -148,6 +148,23 @@ function isInViewport(element) {
   
   window.addEventListener('scroll', handleScroll);
 
+// ------------------------------------------------------Menu bar-----------------------------------
+
+const menuToggle = document.getElementById('menu-toggle');
+const mainNav = document.getElementById('main-nav');
+
+// Toggle dropdown on click
+menuToggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    mainNav.classList.toggle('show');
+});
+
+// Hide dropdown if clicked outside
+document.addEventListener('click', function (e) {
+    if (!mainNav.contains(e.target) && !menuToggle.contains(e.target)) {
+        mainNav.classList.remove('show');
+    }
+});
 
 // ------------------------------------------------------diary-entry-----------------------------------
 
@@ -173,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// ------------------------------------------------------------MIni-game------------------------------------------
+// ------------------------------------------------------------Mini-game------------------------------------------
 
 
 let userScore=0;
@@ -266,37 +283,3 @@ function startBreathingExercise() {
 
     setTimeout(() => clearInterval(interval), 12000); // Stops after one cycle
 }
-
-// ------------------------------------------------------------mood------------------------------------------
-
-
-document.getElementById('detect_mood').addEventListener('click', () => {
-    // Display message while mood detection is in progress
-    document.getElementById('mood-result').innerText = "Detecting mood...";
-
-    fetch("{% url 'detect_mood/' %}", {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': '{{ csrf_token }}',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({}) // Sending an empty body as we are not passing any additional data
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            // Display error message if there is an error
-            alert(data.error);
-            document.getElementById('mood-result').innerText = "Error: " + data.error;
-        } else {
-            // Display the detected mood
-            document.getElementById('mood-result').innerText = `Detected Mood: ${data.mood}`;
-        }
-    })
-    .catch(error => {
-        // Handle any unexpected errors
-        console.error('Error:', error);
-        alert('An error occurred while detecting mood.');
-        document.getElementById('mood-result').innerText = 'An error occurred while detecting mood.';
-    });
-});

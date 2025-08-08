@@ -2,13 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomSignupForm, CustomLoginForm
-from .models import DiaryEntry ,HealthMetric, Appointment, Medication, Notification, Mood, CBTExercise, CBTProgress
+from .models import DiaryEntry ,HealthMetric, Appointment, Medication, Notification, CBTExercise, CBTProgress
 from datetime import datetime, timedelta
 from django.http import JsonResponse
-import cv2
 import numpy as np
-from deepface import DeepFace
-import calendar
 from datetime import date
 from django.utils.safestring import mark_safe
 
@@ -173,80 +170,31 @@ def Selfcare(request):
 def skill_building_exercises(request):
     return render(request, 'skill_building_exercises.html')
 
-@login_required
-def detect_mood(request):
-    if request.method == "POST" and request.is_ajax():
-        print("Mood detection triggered")
-        # Open the webcam and capture a single frame
-        video_capture = cv2.VideoCapture(0)
-        ret, frame = video_capture.read()
-        video_capture.release()
-        print("Camera Access:", ret)
+# @login_required
 
-        if not ret:
-            return JsonResponse({'error': 'Unable to access camera.'}, status=400)
 
-        # Convert frame to RGB (DeepFace expects RGB images)
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+# @login_required
+# def mood_calendar(request):
+#     # Ensure the user is logged in
+#     moods = Mood.objects.filter(user=request.user)
+#     mood_dict = {m.date: {"morning": m.morning_mood, "evening": m.evening_mood} for m in moods}
 
-        try:
-            # Analyze the frame for mood
-            analysis = DeepFace.analyze(frame, actions=['emotion'])
-            mood = analysis['dominant_emotion']
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+#     today = date.today()
+#     calendar_html = "<table class='calendar'>"
+#     calendar_html += "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>"
 
-        # Map detected mood to emojis
-        mood_to_emoji = {
-            "happy": "😊",
-            "sad": "😢",
-            "angry": "😡",
-            "neutral": "😐",
-            "surprise": "😂",
-            "fear": "😴",  # Replace this if better mapping fits
-            "disgust": "🤔",  # Replace this if better mapping fits
-        }
-        mood_emoji = mood_to_emoji.get(mood, "🙂")  # Default to a neutral emoji
+#     c = calendar.Calendar()
+#     for week in c.monthdatescalendar(today.year, today.month):
+#         calendar_html += "<tr>"
+#         for day in week:
+#             if day.month == today.month:
+#                 mood = mood_dict.get(day, {})
+#                 morning = mood.get("morning", "🙂")
+#                 evening = mood.get("evening", "🙂")
+#                 calendar_html += f"<td>{day.day}<br>{morning} {evening}</td>"
+#             else:
+#                 calendar_html += "<td></td>"
+#         calendar_html += "</tr>"
 
-        # Store mood in the database
-        date_today = datetime.date.today()
-        mood_entry, created = Mood.objects.get_or_create(user=request.user, date=date_today)
-
-        # Save mood based on time of day
-        current_hour = datetime.datetime.now().hour
-        if current_hour < 12:
-            mood_entry.morning_mood = mood_emoji
-        else:
-            mood_entry.evening_mood = mood_emoji
-
-        mood_entry.save()
-
-        return JsonResponse({'mood': mood_emoji})
-
-    return JsonResponse({'error': 'Invalid request.'}, status=400)
-
-@login_required
-def mood_calendar(request):
-    # Ensure the user is logged in
-    moods = Mood.objects.filter(user=request.user)
-    mood_dict = {m.date: {"morning": m.morning_mood, "evening": m.evening_mood} for m in moods}
-
-    today = date.today()
-    calendar_html = "<table class='calendar'>"
-    calendar_html += "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>"
-
-    c = calendar.Calendar()
-    for week in c.monthdatescalendar(today.year, today.month):
-        calendar_html += "<tr>"
-        for day in week:
-            if day.month == today.month:
-                mood = mood_dict.get(day, {})
-                morning = mood.get("morning", "🙂")
-                evening = mood.get("evening", "🙂")
-                calendar_html += f"<td>{day.day}<br>{morning} {evening}</td>"
-            else:
-                calendar_html += "<td></td>"
-        calendar_html += "</tr>"
-
-    calendar_html += "</table>"
-    return render(request, "mood_calendar.html", {"calendar_html": mark_safe(calendar_html)})
+#     calendar_html += "</table>"
+#     return render(request, "mood_calendar.html", {"calendar_html": mark_safe(calendar_html)})

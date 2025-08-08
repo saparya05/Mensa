@@ -4,11 +4,11 @@ from django.db import models
 from datetime import time
 
 class DiaryEntry(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Link entry to a user
-    title = models.CharField(max_length=200, blank=True, null=True)  # Optional title
-    content = models.TextField()  # Diary content
-    created_at = models.DateTimeField(auto_now_add=True)  # Auto-timestamp
-    updated_at = models.DateTimeField(auto_now=True)  # Auto-update on edit
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  
+    title = models.CharField(max_length=200, blank=True, null=True)  
+    content = models.TextField() 
+    created_at = models.DateTimeField(auto_now_add=True)  
+    updated_at = models.DateTimeField(auto_now=True)  
 
     def __str__(self):
         return f"{self.user.username} - {self.title or 'No Title'}"
@@ -57,7 +57,7 @@ class Notification(models.Model):
 class CBTExercise(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    template = models.JSONField()  # Store templates like Thought Record
+    template = models.JSONField()  
 
     def __str__(self):
         return self.title
@@ -65,17 +65,9 @@ class CBTExercise(models.Model):
 class CBTProgress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     exercise = models.ForeignKey(CBTExercise, on_delete=models.CASCADE)
-    response = models.JSONField()  # Store user responses dynamically
+    response = models.JSONField()  
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.exercise.title}"
     
-class Mood(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateField(auto_now_add=True)
-    morning_mood = models.CharField(max_length=50, blank=True, null=True)
-    evening_mood = models.CharField(max_length=50, blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.user.username} - {self.date}"

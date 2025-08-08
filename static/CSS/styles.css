@@ -36,7 +36,7 @@ header{
     justify-content: center;
     align-items: center;
 }
-#menu-icon{
+.menu-icon{
     font-size: 1.5rem;
     color: var(--text-color);
     display: none;
@@ -319,7 +319,47 @@ footer h2, p{
   opacity: 1;
   visibility: visible;
 }
+
+
+
 /* --------------------------------------------------Responsive----------------------------------------- */
+
+@media (max-width: 895px) {
+    .menu-icon {
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    #main-nav {
+        display: none;
+        flex-direction: column;
+        background: var(--quaternary-bg-color);
+        position: absolute;
+        top: 60px; 
+        right: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        z-index: 9999;
+    }
+
+    /* Show when active */
+    #main-nav.show {
+        display: flex;
+    }
+
+    /* Dropdown link styles */
+    #main-nav a {
+        text-decoration: none;
+        color: var(--text-color);
+        padding: 8px;
+        border-bottom: 1px solid #e6e6e6;
+    }
+    #main-nav a:last-child {
+        border-bottom: none;
+    }
+}
+
 @media(max-width:1285px){
   header{
       height: 5rem;
@@ -353,9 +393,23 @@ footer h2, p{
     }
 }
 @media(max-width:895px){
-  #menu-icon{
-      display: block;
+  #menu {
+    display: none; 
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    z-index: 9999;
   }
+  #menu.show {
+    display: flex; 
+  }
+
+ 
   header{
       height: 5rem;
       display: flex;
@@ -561,14 +615,6 @@ footer h2, p{
 
 }
 
-/* form {
-  max-width: 80%;
-  margin: auto;
-  padding: 50px;
-  background-color: var(--quaternary-bg-color);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-} */
 
 .custom-btn {
   display: block;
@@ -617,12 +663,16 @@ footer h2, p{
   display: block;
   padding: 10px;
   text-decoration: none;
+  border-bottom: 1px solid #e6e6e6;
   color: #333;
   font-size: 14px;
 }
 
 .dropdown-menu a:hover {
   background-color: #f0f0f0;
+}
+.dropdown-menu a:last-child {
+  border-bottom: none;
 }
 
 #menu {

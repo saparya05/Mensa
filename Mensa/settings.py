@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'MensaApp',
-    'django_cron',
 ]
 
 MIDDLEWARE = [
