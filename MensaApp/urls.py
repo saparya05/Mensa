@@ -12,7 +12,7 @@ urlpatterns = [
     path("medications/", views.medications, name="medications"),
     path("notifications/", views.notifications, name="notifications"),
     path("mini_games/", views.mini_games, name="mini_games"),
-    path("meditation_exercise/", views.meditation_exercise, name="meditation_exercise"),
-    path("Selfcare/", views.Selfcare, name="Selfcare"),
     path('skill-building-exercises/', views.skill_building_exercises, name='SBE'),
+    path('meditation-exercise/', views.static_page_view, {'page_key': 'meditation_exercise'}, name='meditation_exercise'),
+    path('selfcare/', views.static_page_view, {'page_key': 'selfcare'}, name='selfcare'),
 ]

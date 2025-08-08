@@ -3,6 +3,19 @@ from django.contrib.auth.models import User
 from django.db import models
 from datetime import time
 
+class StaticPage(models.Model):
+    PAGE_CHOICES = [
+        ('meditation_exercise', 'Meditation Exercise'),
+        ('selfcare', 'Selfcare'),
+    ]
+
+    page_key = models.CharField(max_length=50, choices=PAGE_CHOICES, unique=True)
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+
+    def __str__(self):
+        return self.get_page_key_display()
+
 class DiaryEntry(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  
     title = models.CharField(max_length=200, blank=True, null=True)  

@@ -2,11 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomSignupForm, CustomLoginForm
-from .models import DiaryEntry ,HealthMetric, Appointment, Medication, Notification, CBTExercise, CBTProgress
-from datetime import datetime, timedelta
+from .models import StaticPage, DiaryEntry ,HealthMetric, Appointment, Medication, Notification, CBTExercise, CBTProgress
+from datetime import datetime, timedelta, date
 from django.http import JsonResponse
-import numpy as np
-from datetime import date
 from django.utils.safestring import mark_safe
 
 
@@ -40,6 +38,12 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+
+def static_page_view(request, page_key):
+    page = get_object_or_404(StaticPage, page_key=page_key)
+    return render(request, f"{page_key}.html", {"page": page})
+
 
 @login_required
 def activities(request):
@@ -157,14 +161,14 @@ def notifications(request):
 def mini_games(request):
     return render(request, 'mini_games.html')
 
-@login_required
-def meditation_exercise(request):
-    return render(request, 'meditation_exercise.html')
+# @login_required
+# def meditation_exercise(request):
+#     return render(request, 'meditation_exercise.html')
 
 
-@login_required
-def Selfcare(request):
-    return render(request, 'Selfcare.html')
+# @login_required
+# def Selfcare(request):
+#     return render(request, 'Selfcare.html')
 
 @login_required
 def skill_building_exercises(request):
