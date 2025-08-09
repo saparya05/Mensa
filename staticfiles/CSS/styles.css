@@ -1285,3 +1285,9 @@ padding: 2rem;
   background-color: #45a049;
 }
 
+@media(max-width:895px){
+  table, .health-tracker-form input, .health-tracker-form textarea {
+    width: 75%;
+  }
+
+}

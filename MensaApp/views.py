@@ -60,7 +60,7 @@ def diary(request):
             entry = get_object_or_404(DiaryEntry, id=entry_id, user=request.user)
             title = request.POST.get('title')
             content = request.POST.get('content')
-            if content:
+            if content.strip():
                 entry.title = title
                 entry.content = content
                 entry.save()
@@ -73,14 +73,25 @@ def diary(request):
             entry.delete()
             print("Entry deleted successfully!")
 
+        elif action == 'add':
+            title = request.POST.get('title')
+            content = request.POST.get('content')
+            if content.strip():
+                DiaryEntry.objects.create(
+                    user=request.user,
+                    title=title,
+                    content=content
+                )
+                print("New entry created successfully!")
+            else:
+                print("Content cannot be empty.")
+
         return redirect('diary')
 
+    # Fetch all diary entries for the logged-in user, latest first
     entries = DiaryEntry.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'diary.html', {'entries': entries})
 
-@login_required
-def mood(request):
-    return render(request, 'mood.html')
 
 
 
@@ -161,44 +172,9 @@ def notifications(request):
 def mini_games(request):
     return render(request, 'mini_games.html')
 
-# @login_required
-# def meditation_exercise(request):
-#     return render(request, 'meditation_exercise.html')
-
-
-# @login_required
-# def Selfcare(request):
-#     return render(request, 'Selfcare.html')
 
 @login_required
 def skill_building_exercises(request):
     return render(request, 'skill_building_exercises.html')
 
-# @login_required
 
-
-# @login_required
-# def mood_calendar(request):
-#     # Ensure the user is logged in
-#     moods = Mood.objects.filter(user=request.user)
-#     mood_dict = {m.date: {"morning": m.morning_mood, "evening": m.evening_mood} for m in moods}
-
-#     today = date.today()
-#     calendar_html = "<table class='calendar'>"
-#     calendar_html += "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>"
-
-#     c = calendar.Calendar()
-#     for week in c.monthdatescalendar(today.year, today.month):
-#         calendar_html += "<tr>"
-#         for day in week:
-#             if day.month == today.month:
-#                 mood = mood_dict.get(day, {})
-#                 morning = mood.get("morning", "🙂")
-#                 evening = mood.get("evening", "🙂")
-#                 calendar_html += f"<td>{day.day}<br>{morning} {evening}</td>"
-#             else:
-#                 calendar_html += "<td></td>"
-#         calendar_html += "</tr>"
-
-#     calendar_html += "</table>"
-#     return render(request, "mood_calendar.html", {"calendar_html": mark_safe(calendar_html)})

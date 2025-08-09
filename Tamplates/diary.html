@@ -27,7 +27,7 @@
     <p class="diary_preview">{{ entry.content.splitlines|first }}</p>
     <small>Written on {{ entry.created_at|date:"F j, Y, g:i a" }}</small>
 
-    <button class="diary_icon1" onclick="editEntry({{ entry.id }}, '{{ entry.title|escapejs }}', '{{ entry.content|escapejs }}')">
+    <button class="diary_icon1" onclick="editEntry('{{ entry.id }}', '{{ entry.title|escapejs }}', '{{ entry.content|escapejs }}')">
         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAPJJREFUSEvFk7EOAUEQhr97AgqRaKm9gMYL0VHRiFCg9EYSb6CSaFUSegk3yRXr7O7s3d7ltt3d75v9Zzah5pXUzCdWsAbewMpVaIxgD8wy8Bw42CRlBR3gAnQN6BLY5CVlBG3gCQyAE9DLoAtgGyuYpJlLpSPgBvSBcxZPdESSt+Qu6w6MgSvQAl6xTZYm7nIQkQyBh2/UQ3pgVm6yjil8qv0jTRAFF7lP4IJLMyWyoOUSVAJ3vaAyuEvwsby9UCzmfVtEeUFpeMgLouDaFAVNiXZI+wfafXW/EYFtitRKjQM/RYdMURH4X18biahoxd7zXwouJhn8uXp/AAAAAElFTkSuQmCC"/>
     </button>
 
