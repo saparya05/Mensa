@@ -1059,6 +1059,30 @@ table th, table td {
   padding: 1rem;
   border-radius: 1rem;
 }
+
+@media(max-width:895px){
+  .activity_item, .activity_item1{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .act_container, .act_para{
+    width: 100%;
+  }
+  .act_container a{
+    text-align: center;
+  }
+  #act_rev, #act_rev2{
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+}
+
 /* ----------------------------------------------Exe/med------------------------------------------ */
 
 .importance_of_meditation .medit{
