@@ -742,6 +742,17 @@ form p a{
   text-decoration: none;
   color: var(--text-color);
 }
+
+@media(max-width:895px){
+  .signup-container, .login-container{
+    width: 100%;
+  }
+  .signup, .login{
+  width: 100%;
+  }
+
+}
+
 /* ---------------------------------------------------Activities------------------------------------------ */
 .activity_item, .activity_item1{
   width: 100%;
